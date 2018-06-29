@@ -1,17 +1,21 @@
-const express = require('express');
-const renderer = require('./middleware/renderer');
-const path = require('path');
+import express from 'express';
+import renderer from './middleware/renderer';
 
 const app = express();
 const router = express.Router();
-const PORT = "8080";
+const PORT = "3000";
+const path = require('path');
 
-router.use('^/$', renderer);
+//router.use('*', renderer);
+
 router.use(express.static(
   path.resolve(__dirname, '..', 'build'),
   { maxAge: '30d' }
 ));
 
+router.get('/', (_req, res) => {
+  res.status(200).sendFile('index.html');
+});
 app.use(router);
 
 app.listen(PORT, (err) => {
@@ -20,6 +24,5 @@ app.listen(PORT, (err) => {
     return;
   }
 
-  renderer();
   console.log(`Server is listening port ${PORT}...`);
 });
