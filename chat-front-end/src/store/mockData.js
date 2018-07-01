@@ -42,14 +42,14 @@ export default {
     {
       name: "John Craft",
       email: "j.craft@mail.com",
-      profileURL: "another-fake",
+      profileURL: "https://www.pyimagesearch.com/wp-content/uploads/2018/06/face_recognition_opencv_example_02.jpg",
       status: "Keeping pumping...",
       userId: "abc",
     },
     {
       name: "Jessica Lovely",
       email: "veryloverly@mail.com",
-      profileURL: "yet-fake-again",
+      profileURL: "https://www.pyimagesearch.com/wp-content/uploads/2018/06/face_recognition_opencv_example_03.jpg",
       status: "Learning push ups",
       userId: "def",
     },

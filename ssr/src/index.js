@@ -13,7 +13,7 @@ const bundle = (
   </Provider>
 );
 
-ReactDOM.hydrate(
+ReactDOM.render(
   bundle, 
   document.getElementById('root')
 );

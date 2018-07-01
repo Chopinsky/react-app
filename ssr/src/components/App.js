@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Loadable from 'react-loadable';
+import { connect } from 'react-redux';
+import { setMessage } from "../store/action";
 import '../assets/App.css';
 import { Main } from "./Main";
 import ControlButton from "./ControlButton";
@@ -9,7 +11,17 @@ const AsyncHeader = Loadable({
   loading: () => <div>Loading sidebar...</div>,
 });
 
-class App extends Component {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    if (!this.props.message) {
+      //this.props.updateMessage("Hello from client!");
+    }
+  }
+  
   render() {
     return (
       <div className="app">
@@ -26,9 +38,17 @@ class App extends Component {
             />
           </div>
         </Main>
+        <p>Redux: {this.props.message}</p>
       </div>
     );
   }
 }
 
-export default App;
+// export default connect(
+//   ({ app }) => ({
+//     message: app.message,
+//   }),
+//   (dispatch) => ({
+//     updateMessage: (message) => dispatch(setMessage(message))
+//   })
+// );
