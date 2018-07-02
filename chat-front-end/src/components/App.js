@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="app">
         <Sidebar contacts={state.contacts} />
-        <Main user={state.user} />
+        <Main user={state.user} activeUserId={state.activeUserId} />
       </div>
     );
   }
