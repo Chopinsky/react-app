@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import '../assets/Main.css';
-import Empty from './Empty';
-import Chat from './Chat';
+import React, { Component } from "react";
+import "../assets/Main.css";
+import Empty from "./Empty";
+import Chat from "./Chat";
 
 export default class Main extends Component {
   render() {
@@ -9,11 +9,11 @@ export default class Main extends Component {
 
     return (
       <main className="main">
-        {
-          activeUserId
-            ? <Chat activeUserId={activeUserId} />
-            : <Empty user={user}/>
-        }        
+        {activeUserId ? (
+          <Chat activeUserId={activeUserId} />
+        ) : (
+          <Empty user={user} />
+        )}
       </main>
     );
   }
