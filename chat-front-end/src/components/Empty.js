@@ -10,6 +10,13 @@ export default class Empty extends Component {
       <div className="empty">
         <h1 className="emptyName">Welcome, {firstName}</h1>
         <img className="emptyProfile" src={profileURL} alt={name} />
+        <p className="emptyStatus">
+          <b>Status: </b>{status}
+        </p>
+        <button className="emptyBtn">Start a conversation</button>
+        <p className="emptyInfo">
+          Search for someone to start chatting with or go to Contacts to see who is available
+        </p>
       </div>
     );
   }

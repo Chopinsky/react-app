@@ -6,8 +6,8 @@ export default class Chat extends Component {
     const { activeUserId } = this.props;
 
     return (
-      <div>
-        {activeUserId}
+      <div className="chat">
+        Conversation for user id: {activeUserId}
       </div>
     );
   }

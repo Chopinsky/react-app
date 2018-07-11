@@ -56,5 +56,5 @@ export default {
       userId: "def"
     }
   ],
-  activeUserId: "def"
+  activeUserId: ""
 };
