@@ -5,12 +5,12 @@ import Chat from "./Chat";
 
 export default class Main extends Component {
   render() {
-    const { activeUserId, user } = this.props;
+    const { activeUser, messages, user } = this.props;
 
     return (
       <main className="main">
-        {activeUserId ? (
-          <Chat activeUserId={activeUserId} />
+        {activeUser ? (
+          <Chat activeUser={activeUser} messages={messages} />
         ) : (
           <Empty user={user} />
         )}

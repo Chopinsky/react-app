@@ -2,7 +2,6 @@ import { combineReducers } from "redux";
 import data from "./mockData";
 
 const userInitState = data.user;
-const activeUserState = data.activeUserId;
 const msgInitState = data.messages;
 const contactInitState = data.contacts;
 
@@ -10,9 +9,9 @@ const userReducer = (state = userInitState, action) => {
   return state;
 };
 
-const activeUserReducer = (state = activeUserState, action) => {
+const activeUserReducer = (state = null, action) => {
   switch (action.type) {
-    case "SET_ACTIVE_USER_ID":  
+    case "SET_ACTIVE_USER":
       return action.payload
   
     default:
@@ -21,7 +20,14 @@ const activeUserReducer = (state = activeUserState, action) => {
 };
 
 const messageReducer = (state = msgInitState, action) => {
-  return state;
+  switch (action.type) {
+    case "GET_MESSAGES":
+      console.log(action.payload)
+      return data.messages[action.payload] ? data.messages[action.payload] : state;
+  
+    default:
+      return state;
+  }
 };
 
 const contactReducer = (state = contactInitState, action) => {
@@ -30,7 +36,7 @@ const contactReducer = (state = contactInitState, action) => {
 
 export default combineReducers({
   user: userReducer,
-  activeUserId: activeUserReducer,
+  activeUser: activeUserReducer,
   messages: messageReducer,
   contacts: contactReducer
 });
