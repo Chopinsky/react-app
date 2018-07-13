@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../assets/Message.css';
 
 const Message = ({ message }) => {
-  console.log(message);
+  const { text, isUserMsg } = message;
+  const cssClass = isUserMsg ? "message userMsg" : "message";
+
   return (
-    <header className="message">
-      {message.text}
-    </header>
+    <span className={cssClass}>
+      {text}
+    </span>
   );
 };
 

@@ -11,3 +11,23 @@ export const getMessages = (user) => {
     payload: user ? user.userId : null,
   }
 }
+
+export const setTypingValue = (value) => {
+  return {
+    type: "SET_TYPING_VALUE",
+    payload: value,
+  }
+}
+
+export const sendNewMessage = (text, activeUserId, isUserMsg) => {
+  return {
+    type: "SEND_NEW_MESSAGE",
+    payload: {
+      message: {
+        isUserMsg,
+        text,
+      },
+      activeUserId,
+    },
+  }
+}
