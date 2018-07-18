@@ -1,0 +1,40 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.emptyName {
+  color: #fff;
+}
+
+.emptyStatus {
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.emptyStatus .emptyInfo {
+  padding: 1rem;
+}
+
+.emptyProfile {
+  border-radius: 50%;
+  margin: 2rem 0;
+}
+
+.emptyBtn {
+  padding: 1rem;
+  margin: 1rem 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  outline: 0;
+}
+
+.emptyBtn:hover {
+  background: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
