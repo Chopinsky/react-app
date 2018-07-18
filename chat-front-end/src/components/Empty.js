@@ -8,8 +8,19 @@ export default class Empty extends Component {
 
     return (
       <div className="empty">
-        <h1 className="emptyName">Welcome, {firstName}</h1>
-        <img className="emptyProfile" src={profileURL} alt={name} />
+        <h1 className="name">Welcome, {firstName}</h1>
+        <img className="profile" src={profileURL} alt={name} />
+        <p className="status">
+          <b>Status: </b>
+          {status}
+        </p>
+        <button className="button">
+          Start a conversation
+          <p className="info">
+            Search for someone to start chatting with or go to Contacts to see
+            who is available
+          </p>
+        </button>
       </div>
     );
   }
