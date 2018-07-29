@@ -8,6 +8,7 @@ exports.types = `
 
   type Mutation {
     createUser(name: String!): User!
+    post(url: String!, description: String!): Link!
   }
 
   type User {
