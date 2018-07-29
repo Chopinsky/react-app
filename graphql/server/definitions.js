@@ -22,8 +22,20 @@ exports.types = `
   }
 `;
 
+const defaultLinks = [{
+  id: 'link-0',
+  description: 'Full stack tutorial for GraphQL',
+  url: 'https://www.howtographql.com',
+}];
+
 exports.resolvers = {
   Query: {
-    info: () => `This is the API of a Hackernews Clone`
+    info: () => `This is the API of a Hackernews Clone`,
+    feed: () => defaultLinks,
+  },
+  Link: {
+    id: (root) => root.id,
+    description: (root) => root.description,
+    url: (url) => root.url,
   }
 }
