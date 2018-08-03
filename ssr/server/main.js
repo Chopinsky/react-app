@@ -1,24 +1,20 @@
-import express from 'express';
-import renderer from './middleware/renderer';
+import express from "express";
 
 const app = express();
 const router = express.Router();
 const PORT = "3000";
-const path = require('path');
+const path = require("path");
 
-//router.use('*', renderer);
+router.use(
+  express.static(path.resolve(__dirname, "..", "build"), { maxAge: "30d" })
+);
 
-router.use(express.static(
-  path.resolve(__dirname, '..', 'build'),
-  { maxAge: '30d' }
-));
-
-router.get('/', (_req, res) => {
-  res.status(200).sendFile('index.html');
+router.get("/", (_req, res) => {
+  res.status(200).sendFile("index.html");
 });
 app.use(router);
 
-app.listen(PORT, (err) => {
+app.listen(PORT, err => {
   if (err) {
     console.error(`Failed to launch the server: ${err}`);
     return;
