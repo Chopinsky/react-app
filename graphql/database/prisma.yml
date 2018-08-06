@@ -1,0 +1,4 @@
+endpoint: ''
+datamodel: datamodel.graphql
+secret: secret-SALT-1234
+authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlcnZpY2UiOiJ1bmRlZmluZWRAdW5kZWZpbmVkIiwicm9sZXMiOlsiYWRtaW4iXX0sImlhdCI6MTUzMzU3MDEwNSwiZXhwIjoxNTM0MTc0OTA1fQ.X4mnq1Y0hfB9pbGlj3pGdmqeDPXcziI3eESTJxEH160'

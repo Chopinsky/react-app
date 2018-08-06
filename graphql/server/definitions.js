@@ -26,16 +26,26 @@ const findLinkIndex = (id) => {
   return -1;
 }
 
+const findLink = (id) => {
+  if (!links || !links.length) {
+    return null;
+  }
+
+  let index = findLinkIndex(id);
+
+  if (id >= 0 && id < links.length) {
+    return links[index];
+  }
+
+  return null;
+}
+
 exports.resolvers = {
   Query: {
     info: () => `This is the API of a Hackernews Clone`,
     feed: () => links,
     link: (obj, args, context, info) => {
-      let index = findLinkIndex(args.id);
-
-      if (index >= 0) {
-        return links[index];
-      }
+      return findLink(args.id);
     },
   },
   Mutation: {
@@ -50,26 +60,23 @@ exports.resolvers = {
       return link;
     },
     updateLink: (root, args) => {
-      let index = findLinkIndex(args.id);
-
-      if (index < 0) {
+      let link = findLink(args.id);
+      if (!link) {
         return null;
       }
 
       if (!args.url && !args.description) {
-        return links[index];
-
+        return link;
       } else {
         if (args.url) {
-          links[index].url = args.url;
+          link.url = args.url;
         }
 
         if (args.description) {
-          links[index].description = args.description;
+          link.description = args.description;
         }
 
-        return links[index];
-
+        return link;
       }
     },
     deleteLink: (root, args) => {
