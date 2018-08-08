@@ -50,8 +50,12 @@ exports.resolvers = {
   },
   Mutation: {
     post: (root, args) => {
+      const now = Date.now().toString();
+
       const link = {
         id: `link-${idCount++}`,
+        createdAt: now,
+        updatedAt: now,
         description: args.description,
         url: args.url,
       };
@@ -76,6 +80,7 @@ exports.resolvers = {
           link.description = args.description;
         }
 
+        link.updatedAt = Date.now().toString();
         return link;
       }
     },
@@ -87,12 +92,20 @@ exports.resolvers = {
       }
 
       let removed = links.splice(index, 1);
-      return (removed && removed.length > 0) ? removed[0] : null;
+      let removedLink = (removed && removed.length > 0) ? removed[0] : null;
+
+      if (removedLink) {
+        removedLink.updatedAt = Date.now().toString();
+      }
+
+      return removedLink;
     },
   },
   Link: {
     id: (root) => root.id,
     description: (root) => root.description,
     url: (root) => root.url,
+    createdAt: (root) => root.createdAt,
+    updatedAt: (root) => root.updatedAt,
   }
 }
