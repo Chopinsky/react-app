@@ -5,10 +5,37 @@ const defaultLinks = [{
 }];
 
 let links = defaultLinks.slice();
+let users = {};
 let idCount = defaultLinks.length;
 
 const generateUUID = () => {
   return Math.random().toString(36).substring(2, 15);
+}
+
+const createUser = (newUser) => {
+  if (users && newUser && newUser.id) {
+    let key = newUser.id;
+    if (users[key]) {
+      return false;
+    }
+
+    users[key] = newUser;
+    return true;
+  }
+
+  return false;
+}
+
+const getUser = (id) => {
+  if (users && id) {
+    return users[id];
+  }
+
+  return null;
+}
+
+const getAllUsers = () => {
+  return this.users;
 }
 
 const getAllLinks = () => {
@@ -74,6 +101,9 @@ const getNextID = () => {
 
 module.exports = {
   generateUUID,
+  createUser,
+  getUser,
+  getAllUsers,
   getAllLinks,
   getLink,
   getLinkIndex,

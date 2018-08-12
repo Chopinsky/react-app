@@ -1,7 +1,15 @@
 import { getLink, getLinkIndex, getNextID, addLink, removeLinkAt } from "../common";
 
+const login = async function (parent, args, context, info) {
+
+};
+
+const signup = async function (parent, args, context, info) {
+
+};
+
 module.exports = {
-  post: (root, args) => {
+  post: (parent, args) => {
     const now = Date.now().toString();
 
     const link = {
@@ -15,7 +23,7 @@ module.exports = {
     addLink(link);
     return link;
   },
-  updateLink: (root, args) => {
+  updateLink: (parent, args) => {
     let link = getLink(args.id);
     if (!link) {
       return null;
@@ -36,7 +44,7 @@ module.exports = {
       return link;
     }
   },
-  deleteLink: (root, args) => {
+  deleteLink: (parent, args) => {
     let index = getLinkIndex(args.id);
 
     if (index < 0) {
@@ -52,4 +60,6 @@ module.exports = {
 
     return removedLink;
   },
+  login,
+  signup,
 };
