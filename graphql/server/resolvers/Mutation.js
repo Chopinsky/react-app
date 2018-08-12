@@ -1,7 +1,9 @@
 import { getLink, getLinkIndex, getNextID, addLink, removeLinkAt } from "../common";
 
-const login = async function (parent, args, context, info) {
+const bcrypt = require('bcrypt');
 
+const login = async function (parent, args, context, info) {
+  const password = bcrypt.hash(args.password, 10);
 };
 
 const signup = async function (parent, args, context, info) {
