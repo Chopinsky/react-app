@@ -1,12 +1,33 @@
-import { getLink, getLinkIndex, getNextID, addLink, removeLinkAt } from "../common";
+import { getLink, getLinkIndex, getNextID, addLink, removeLinkAt, createUser } from "../common";
 
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-const login = async function (parent, args, context, info) {
-  const password = bcrypt.hash(args.password, 10);
-};
+const APP_SECRET = "abcd1234";
 
 const signup = async function (parent, args, context, info) {
+  const password = bcrypt.hash(args.password, 10);
+  const token = jwt.sign({ userId: newUser.id }, APP_SECRET);
+
+  const newUser = {
+    id: args.id,
+    password,
+    name: args.name,
+    email: args.email,
+    links: [],
+  };
+
+  if (createUser(newUser)) {
+    return {
+      user: newUser,
+      token,
+    }
+  } else {
+    return null;
+  }
+};
+
+const login = async function (parent, args, context, info) {
 
 };
 
