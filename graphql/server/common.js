@@ -13,8 +13,8 @@ const generateUUID = () => {
 }
 
 const createUser = (newUser) => {
-  if (users && newUser && newUser.id) {
-    let key = newUser.id;
+  if (users && newUser && newUser.email) {
+    let key = newUser.email;
     if (users[key]) {
       return false;
     }
@@ -26,9 +26,21 @@ const createUser = (newUser) => {
   return false;
 }
 
-const getUser = (id) => {
+const getUser = (email) => {
+  if (users && email) {
+    return users[email];
+  }
+
+  return null;
+}
+
+const getUserByID = (id) => {
   if (users && id) {
-    return users[id];
+    users.forEach(user => {
+      if (user.id === id) {
+        return user;
+      }
+    });
   }
 
   return null;
@@ -103,6 +115,7 @@ module.exports = {
   generateUUID,
   createUser,
   getUser,
+  getUserByID,
   getAllUsers,
   getAllLinks,
   getLink,

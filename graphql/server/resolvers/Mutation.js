@@ -1,8 +1,7 @@
-import { getLink, getLinkIndex, getNextID, addLink, removeLinkAt, createUser } from "../common";
+import { getLink, getLinkIndex, getNextID, addLink, removeLinkAt, createUser, getUser, getUserByID } from "../common";
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 const APP_SECRET = "abcd1234";
 
 const signup = async function (parent, args, context, info) {
@@ -28,12 +27,43 @@ const signup = async function (parent, args, context, info) {
 };
 
 const login = async function (parent, args, context, info) {
+  const user = getUser(args.email);
 
+  if (user) {
+    const valid = await bcrypt.compare(args.password, user.password);
+    if (!valid) {
+      return {
+        errMsg: "Invalid password",
+      };
+    }
+
+    const token = jwt.sign({ userId: user.id }, APP_SECRET);
+    return {
+      token,
+      user,
+    }
+  }
+
+  return {
+    errMsg: "User doesn't exist",
+  };
 };
 
 module.exports = {
-  post: (parent, args) => {
+  post: (parent, args, context, info) => {
+    let user = null;
     const now = Date.now().toString();
+
+    const auth = context.request.get('Authorization');
+    if (auth) {
+      const token = auth.replace('Bearer ', '');
+      const { userId } = jwt.verify(token, APP_SECRET);
+      user = getUserByID(userId);
+
+      if (!user) {
+        return null;
+      }
+    }
 
     const link = {
       id: `link-${getNextID()}`,
@@ -41,12 +71,13 @@ module.exports = {
       updatedAt: now,
       description: args.description,
       url: args.url,
+      postedBy: user,
     };
 
     addLink(link);
     return link;
   },
-  updateLink: (parent, args) => {
+  updateLink: (parent, args, context, info) => {
     let link = getLink(args.id);
     if (!link) {
       return null;
@@ -67,7 +98,7 @@ module.exports = {
       return link;
     }
   },
-  deleteLink: (parent, args) => {
+  deleteLink: (parent, args, context, info) => {
     let index = getLinkIndex(args.id);
 
     if (index < 0) {
